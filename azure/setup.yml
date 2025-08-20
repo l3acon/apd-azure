@@ -24,24 +24,23 @@ controller_credentials:
       subscription: REPLACEME
 
 controller_inventories:
-  - name: Workshop Inventory
+  - name: Demo Inventory
     organization: Default
 
 controller_inventory_sources:
   - name: Azure Inventory
-    inventory: Workshop Inventory
+    inventory: Demo Inventory
     source: azure_rm
     credential: Azure
     overwrite: true
     update_on_launch: true
     source_vars:
       include_vm_resource_groups:
-       - apd-aazure
-       
+       - apd-azure
+       - clab
       hostnames:
        - computer_name
        - default
-       
       keyed_groups:
       - prefix: azure_loc
         key: location
@@ -51,7 +50,7 @@ controller_inventory_sources:
 controller_templates:
   - name: "AZURE / CREATE INFRA"
     job_type: run
-    inventory: "Workshop Inventory"
+    inventory: "Demo Inventory"
     project: "Azure Repo"
     playbook: "project/create_infra.yml"
     execution_environment: "Azure Execution Environment"
@@ -68,7 +67,7 @@ controller_templates:
 
   - name: "AZURE / RHEL 8 VM"
     job_type: run
-    inventory: "Workshop Inventory"
+    inventory: "Demo Inventory"
     project: "Azure Repo"
     playbook: "project/create_rhel_vm_demo.yml"
     execution_environment: "Azure Execution Environment"
@@ -93,7 +92,7 @@ controller_templates:
 
   - name: "AZURE / Windows VM"
     job_type: run
-    inventory: "Workshop Inventory"
+    inventory: "Demo Inventory"
     project: "Azure Repo"
     playbook: "project/create_windows_vm_demo.yml"
     execution_environment: "Azure Execution Environment"
@@ -117,7 +116,7 @@ controller_templates:
 
   - name: "AZURE / Destroy Resource Group"
     job_type: run
-    inventory: "Workshop Inventory"
+    inventory: "Demo Inventory"
     project: "Azure Repo"
     playbook: "project/destroy_resource_group.yml"
     credentials:
