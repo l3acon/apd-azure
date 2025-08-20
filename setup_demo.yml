@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - "{{demo}}/setup.yml"
+  vars:
+    controller_validate_certs: false
+
+  tasks:
+    - name: Setup Components
+      include_role:
+        name: "infra.controller_configuration.dispatch"
+
+    - name: Print Message
+      debug:
+        msg: "{{ user_message }}"
+      when: user_message is defined
